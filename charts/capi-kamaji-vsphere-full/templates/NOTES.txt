@@ -1,0 +1,28 @@
+1. Your Cluster API vSphere cluster "{{ index .Values "capi-kamaji-vsphere" "cluster" "name" }}" has been deployed!
+
+2. Check the cluster status:
+   kubectl get cluster {{ index .Values "capi-kamaji-vsphere" "cluster" "name" }} -n {{ .Release.Namespace }}
+
+3. Monitor the control plane:
+   kubectl get kamajicontrolplane {{ index .Values "capi-kamaji-vsphere" "cluster" "name" }} -n {{ .Release.Namespace }}
+
+4. Check machine deployment status:
+   kubectl get machinedeployment -n {{ .Release.Namespace }} -l cluster.x-k8s.io/cluster-name={{ index .Values "capi-kamaji-vsphere" "cluster" "name" }}
+
+5. Monitor etcd cluster (installed separately):
+   kubectl get pods -n {{ .Release.Namespace }} -l app.kubernetes.io/name=kamaji-etcd
+
+6. Get the kubeconfig when cluster is ready:
+   kubectl get secret {{ index .Values "capi-kamaji-vsphere" "cluster" "name" }}-admin-kubeconfig -n {{ .Release.Namespace }} -o jsonpath='{.data.admin\.svc}' | base64 -d > {{ index .Values "capi-kamaji-vsphere" "cluster" "name" }}-kubeconfig.yaml
+
+7. Check cluster autoscaler:
+   kubectl get deployment -n {{ .Release.Namespace }} -l app.kubernetes.io/name=clusterapi-cluster-autoscaler
+
+8. Verify CSI driver deployment:
+   kubectl get deployment {{ index .Values "capi-kamaji-vsphere" "cluster" "name" }}-vsphere-csi-controller -n {{ .Release.Namespace }}
+
+9. Access metrics through the service:
+   kubectl get service {{ index .Values "capi-kamaji-vsphere" "cluster" "name" }}-metrics -n {{ .Release.Namespace }}
+
+Note: It may take several minutes for the cluster to become ready. 
+Monitor the resources above to track the deployment progress.

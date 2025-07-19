@@ -1,0 +1,103 @@
+
+# -- This section configures the CAPI Kamaji vSphere chart
+capi-kamaji-vsphere:
+  enabled: true
+  # -- vSphere configuration
+  vSphere:
+    server: "<VCENTER_NAME>"
+    dataCenter: "<DATACENTER_NAME>"
+    insecure: true
+    # -- Identity reference for vSphere Cluster Identity
+    identityRef:
+      type: VSphereClusterIdentity
+      name: vsphere-cluster-identity
+  # -- IPAM provider configuration
+  ipamProvider: 
+    ranges: ["<PLACEHOLDER>"]  # eg. "[100.66.2.16-100.66.2.250]"
+    prefix: "<PLACEHOLDER>"    # eg. "24"
+    gateway: "<PLACEHOLDER>"   # eg. "100.66.2.254"
+  # -- Cluster configuration
+  cluster:
+    name: "<CLUSTER_NAME>" # Replace with your CLUSTER_NAME
+    controlPlane:
+      dataStoreName: "<CLUSTER_NAME>" # Replace with your CLUSTER_NAME
+      version: "v1.32.0"
+      kubelet:
+        preferredAddressTypes:
+        - InternalIP
+      network:
+        serviceAddress: "<CLUSTER_ADDRESS>" # Replace with your Cluster Control Plane Address
+        serviceAnnotations:
+          metallb.io/loadBalancerIPs: "<CLUSTER_ADDRESS>"
+    metrics:
+      enabled: true
+  # -- vSphere Cloud Controller Manager configuration
+  vSphereCloudControllerManager:
+    image:
+      tag: "v1.32.0"
+  # -- Node Pools configuration
+  nodePools: # Multiple node pools can be defined here
+    - name: "default"
+      dataStore: "<DATASTORE_NAME>"
+      folder: "<FOLDER_NAME>"
+      resourcePool: "<RESOURCE_POOL_NAME>"
+      storagePolicyName: "<STORAGE_POLICY_NAME>"
+      network: "<NETWORK_NAME>"
+      template: "ubuntu-2404-kube-v1.32.0"
+      replicas: 3
+      numCPUs: 2
+      memoryMiB: 4096
+      diskGiB: 40
+      addressesFromPools:
+        enabled: true
+      nameServers: ["8.8.8.8"]
+      staticRoutes: []
+      # - metric: 100
+      #   to: 100.66.0.2
+      #   via: 100.66.2.1
+      users:
+      - lockPassword: false
+        name: "<USER_NAME>"
+        passwd: "<MKPASSWD>" # Replace with your password generated with mkpasswd
+        sshAuthorizedKeys:
+        - "<SSH_PUBLIC_KEY>" # Replace with your SSH public key
+      autoscaling:
+        enabled: true
+        minSize: "2"
+        maxSize: "6"
+
+# -- This section configures the vSphere CSI driver
+vsphere-csi:
+  enabled: true
+  # -- Cluster configuration
+  cluster:
+    name: "<CLUSTER_NAME>" # Replace with your CLUSTER_NAME
+    targetNamespace: "kube-system"
+  # -- Storage Class configuration
+  storageClass:
+    enabled: true
+    allowVolumeExpansion: true
+    default: true
+    name: "vsphere-csi"
+    reclaimPolicy: "Delete"
+    volumeBindingMode: "WaitForFirstConsumer"
+    parameters:
+      storagepolicyname: "<CLUSTER_NAME>" # Replace with your CLUSTER_NAME
+
+
+# -- This section configures the Cluster Autoscaler
+cluster-autoscaler:
+  enabled: true
+  cloudProvider: "clusterapi"
+  # -- Auto Discovery Options
+  autoDiscovery:
+    # -- clusterName: <CLUSTER_NAME>
+    clusterName: "<CLUSTER_NAME>" # Replace with your CLUSTER_NAME
+    # -- namespace: <CLUSTER_NAMESPACE>
+    namespace: "<CLUSTER_NAMESPACE>" # Replace with your CLUSTER_NAMESPACE
+    # -- labels: # Optional labels to match the node pool configuration
+    # labels: []
+  # -- Cluster API Kubeconfig Secret
+  clusterAPIKubeconfigSecret: "<CLUSTER_NAME>-kubeconfig" # Replace with your CLUSTER_NAME
+  # -- Cluster API Mode Configuration: must be set to kubeconfig-incluster
+  clusterAPIMode: "kubeconfig-incluster"

@@ -1,0 +1,118 @@
+# Patterns to ignore when building packages.
+# This supports shell glob matching, relative path matching, and
+# negation (prefixed with !). Only one pattern per line.
+.DS_Store
+# Common VCS dirs
+.git/
+.gitignore
+.bzr/
+.bzrignore
+.hg/
+.hgignore
+.svn/
+# Common backup files
+*.swp
+*.bak
+*.tmp
+*.orig
+*~
+# Various IDEs
+.project
+.idea/
+*.tmproj
+.vscode/
+# OS generated files
+Thumbs.db
+# Helm test files
+test/
+# Examples directory
+examples/
+# CI/CD files
+.github/
+.gitlab-ci.yml
+.travis.yml
+# Documentation build files
+docs/
+# Local development files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+# Node modules (if any)
+node_modules/
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+# Go build files
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+# Temporary files
+*.log
+*.pid
+*.seed
+*.pid.lock
+# Coverage directory used by tools like istanbul
+coverage/
+# Dependency directories
+jspm_packages/
+# Optional npm cache directory
+.npm
+# Optional eslint cache
+.eslintcache
+# Output of 'npm pack'
+#*.tgz
+# Yarn Integrity file
+.yarn-integrity
+# dotenv environment variables file
+.env
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+# next.js build output
+.next
+# nuxt.js build output
+.nuxt
+# vuepress build output
+.vuepress/dist
+# Serverless directories
+.serverless
+# FuseBox cache
+.fusebox/
+# DynamoDB Local files
+.dynamodb/
+# Terraform files
+*.tfstate
+*.tfstate.*
+.terraform/
+# Ansible files
+*.retry
+# Local values override files
+values-override.yaml
+values.local.yaml
+my-values.yaml
+# Development scripts
+scripts/dev/
+scripts/test/
+# Docker files
+Dockerfile*
+docker-compose*.yml
+# Makefile
+Makefile
+# License file (included in Chart.yaml)
+LICENSE
+# Editor files
+*.swp
+*.swo
+# Temporary chart files
+#*.tgz
+Chart.lock
+
+# Local development values
+values.dev.yaml
+values.staging.yaml
+values.prod.yaml 

@@ -1,0 +1,17 @@
+# -----------------------------------------------------------------------------
+# kamaji-etcd chart overrides
+# -----------------------------------------------------------------------------
+fullnameOverride: "<TENANT_NAME>-etcd" # Replace with your TENANT_NAME
+datastore:
+  enabled: true
+  name: "<TENANT_NAME>" # Replace with your TENANT_NAME
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+    - labelSelector:
+        matchExpressions:
+          - key: app.kubernetes.io/instance
+            operator: In
+            values:
+              - "<TENANT_NAME>-etcd"  # Replace with your TENANT_NAME
+      topologyKey: kubernetes.io/hostname 

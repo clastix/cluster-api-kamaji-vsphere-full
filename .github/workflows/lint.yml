@@ -1,0 +1,27 @@
+name: Lint
+
+on:
+  push:
+    branches: [ "*" ]
+  pull_request:
+    branches: [ "*" ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
+        with:
+          version: v3.3.4
+
+      - name: Building dependencies
+        run: |-
+          helm repo add clastix https://clastix.github.io/charts 
+          helm dependency build ./charts/capi-kamaji-vsphere-full
+
+      - name: Linting Chart
+        run: helm lint ./charts/capi-kamaji-vsphere-full
