@@ -154,7 +154,6 @@ stringData:
 ### Create Secrets
 
 ```bash
-kubectl -n <CLUSTER_NAMESPACE> apply -f vsphere-secret.yaml
 kubectl -n <CLUSTER_NAMESPACE> apply -f vsphere-config-secret.yaml 
 kubectl -n <CLUSTER_NAMESPACE> apply -f csi-config-secret.yaml
 ```
