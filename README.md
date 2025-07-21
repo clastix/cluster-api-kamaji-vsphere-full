@@ -163,7 +163,7 @@ Create a copy of [`values.yaml`](charts/capi-kamaji-vsphere-full/values.yaml) fi
 
 ```yaml
 cp values.yaml <CLUSTER_NAME>-values.yaml
-vi <CLUSTER_NAME>.yaml
+vi <CLUSTER_NAME>-values.yaml
 ```
 
 See the values you can override [here](charts/capi-kamaji-vsphere-full/README.md).
