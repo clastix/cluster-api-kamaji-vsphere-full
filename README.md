@@ -159,7 +159,8 @@ kubectl -n <CLUSTER_NAMESPACE> apply -f csi-config-secret.yaml
 ```
 
 ## Create Cluster Configuration
-Create a copy of `values.yaml` file called `<CLUSTER_NAME>-values.yaml` filled with your cluster configuration.
+Create a copy of chart [`values.yaml`](./charts/capi-kamaji-vsphere-full
+/values.yaml) file called `<CLUSTER_NAME>-values.yaml` and fill it with your custom configuration.
 
 ```yaml
 cp values.yaml <CLUSTER_NAME>-values.yaml
