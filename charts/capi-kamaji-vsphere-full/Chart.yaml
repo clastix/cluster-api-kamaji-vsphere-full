@@ -2,7 +2,7 @@ apiVersion: v2
 name: capi-kamaji-vsphere-full
 description: Helm umbrella chart for deploying Kamaji Clusters on vSphere using Cluster API. Including CSI driver and cluster autoscaler. Requires separate kamaji-etcd installation.
 type: application
-version: 1.0.0
+version: 1.0.1
 appVersion: "1.32.0"
 icon: https://raw.githubusercontent.com/kubernetes/cloud-provider-vsphere/master/docs/vmware_logo.png
 home: https://github.com/clastix/capi-kamaji-vsphere-full
@@ -35,14 +35,14 @@ annotations:
 
 dependencies:
   - name: capi-kamaji-vsphere
-    version: "0.2.6"
+    version: "~0.2.6"
     repository: "https://clastix.github.io/charts"
     condition: capi-kamaji-vsphere.enabled
   - name: vsphere-csi
-    version: "0.1.2"
+    version: "~0.1.2"
     repository: "https://clastix.github.io/charts"
     condition: vsphere-csi.enabled
   - name: cluster-autoscaler
-    version: "9.48.0"
+    version: "~9.48.0"
     repository: "https://kubernetes.github.io/autoscaler"
     condition: cluster-autoscaler.enabled 
