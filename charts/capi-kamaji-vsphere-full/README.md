@@ -1,6 +1,6 @@
 # capi-kamaji-vsphere-full
 
-![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.32.0](https://img.shields.io/badge/AppVersion-1.32.0-informational?style=flat-square)
+![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.32.0](https://img.shields.io/badge/AppVersion-1.32.0-informational?style=flat-square)
 
 Helm umbrella chart for deploying Kamaji Clusters on vSphere using Cluster API. Including CSI driver and cluster autoscaler. Requires separate kamaji-etcd installation.
 
@@ -23,9 +23,9 @@ Helm umbrella chart for deploying Kamaji Clusters on vSphere using Cluster API. 
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://clastix.github.io/charts | capi-kamaji-vsphere | 0.2.6 |
-| https://clastix.github.io/charts | vsphere-csi | 0.1.2 |
-| https://kubernetes.github.io/autoscaler | cluster-autoscaler | 9.48.0 |
+| https://clastix.github.io/charts | capi-kamaji-vsphere | ~0.2.6 |
+| https://clastix.github.io/charts | vsphere-csi | ~0.1.2 |
+| https://kubernetes.github.io/autoscaler | cluster-autoscaler | ~9.48.0 |
 
 ## Values
 
